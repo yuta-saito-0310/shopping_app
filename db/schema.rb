@@ -10,5 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_29_080727) do
+  create_table "shopping_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "item_name"
+    t.integer "sum"
+    t.bigint "shopping_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_name"], name: "index_shopping_details_on_item_name"
+    t.index ["shopping_id"], name: "index_shopping_details_on_shopping_id"
+  end
+
+  create_table "shoppings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.integer "sum"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_shoppings_on_name"
+    t.index ["user_id"], name: "index_shoppings_on_user_id"
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "hashed_password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "word_suggestions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "user_id"], name: "index_word_suggestions_on_name_and_user_id", unique: true
+    t.index ["user_id"], name: "index_word_suggestions_on_user_id"
+  end
+
+  add_foreign_key "shopping_details", "shoppings"
+  add_foreign_key "shoppings", "users"
+  add_foreign_key "word_suggestions", "users"
 end

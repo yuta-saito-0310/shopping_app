@@ -1,0 +1,2 @@
+class WordSuggestion < ApplicationRecord
+end

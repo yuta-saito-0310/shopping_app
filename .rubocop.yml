@@ -1,0 +1,26 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "Gemfile"
+    - "bin/**/*"
+    - "db/**/*"
+    - "log/**/*"
+    - "tmp/**/*"
+    - "vendor/**/*"
+    - "lib/tasks/auto_annotate_models.rake"
+    - "config/**/*"
+    - "Rakefile"
+    - "app/channels/**/*"
+    - "app/controllers/application_controller.rb"
+    - "app/helpers/application_helper.rb"
+    - "app/jobs/application_job.rb"
+    - "app/mailers/application_mailer.rb"
+    - "app/models/application_record.rb"
+    - "config.ru"
+    - "test/application_system_test_case.rb"
+    - "test/channels/application_cable/connection_test.rb"
+    - "test/test_helper.rb"
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'

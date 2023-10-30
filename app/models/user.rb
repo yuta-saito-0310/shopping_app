@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :word_suggestions
 
   before_save :set_default_name
+  before_validation :downcase_email
   validate :name_length
   validates :email, presence: true, uniqueness: { message: 'メールアドレスが重複しています' }, email: { mode: :strict }
 
@@ -27,5 +28,9 @@ class User < ApplicationRecord
     return unless name.length > 30
 
     errors.add(:name, '名前は30文字以内にしてください')
+  end
+
+  def downcase_email
+    self.email = email.downcase if email.present?
   end
 end

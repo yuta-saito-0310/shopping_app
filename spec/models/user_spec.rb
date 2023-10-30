@@ -58,6 +58,14 @@ RSpec.describe User, type: :model do
         expect(duplicate_email_user).not_to be_valid
       end
     end
+
+    context '大文字のメールアドレスを登録しようとしたとき' do
+      let(:big_email_user) { FactoryBot.create(:user, email: 'Big@email.com') }
+
+      it 'メールアドレスが小文字に変換されて保存されていること' do
+        expect(big_email_user.email).to eq('big@email.com')
+      end
+    end
   end
 
   describe 'パスワードのハッシュ化をテスト' do

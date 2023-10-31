@@ -1,0 +1,11 @@
+<% @title = '登録ページ' %>
+<div id='sign-up-form'>
+    <h1><%= @title %></h1>
+
+    <%= form_with model: @form, url :create_user do |f| %>
+      <div>
+        <%= f.label :email, 'メールアドレス' %>
+        <%= f.text_field :email %>
+      </div>
+    <% end %>
+</div>

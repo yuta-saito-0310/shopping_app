@@ -63,19 +63,20 @@ RSpec.describe User, type: :model do
       let(:big_email_user) { FactoryBot.create(:user, email: 'Big@email.com') }
 
       it 'メールアドレスが小文字に変換されて保存されていること' do
-        expect(big_email_user.email).to eq('big@email.com')
+        expect(User.find_by(id: big_email_user.id).email).to eq('big@email.com')
       end
     end
   end
 
   describe 'パスワードのハッシュ化をテスト' do
-    let(:user) { FactoryBot.create(:user, password:) }
+    let(:user) { FactoryBot.build(:user, password:) }
 
     context 'パスワードがnilのとき' do
       let(:password) { nil }
 
-      it 'hashed_passwordがnilになること' do
-        expect(user.hashed_password).to eq(nil)
+      it 'ユーザーが無効であること' do
+        user.valid?
+        expect(user.errors[:hashed_password]).to include("can't be blank")
       end
     end
 

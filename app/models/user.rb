@@ -9,6 +9,7 @@ class User < ApplicationRecord
   before_validation :downcase_email
   validate :name_length
   validates :email, presence: true, uniqueness: { message: 'メールアドレスが重複しています' }, email: { mode: :strict }
+  validates :hashed_password, presence: true
 
   def password=(raw_password)
     if raw_password.is_a?(String)

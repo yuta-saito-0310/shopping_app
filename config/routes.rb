@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get 'login' => 'sessions#new', as: :login
   post 'session' => 'sessions#create', as: :session
-  delete 'session' => 'sessions#destroy'
+  delete 'session' => 'sessions#destroy', as: :logout
 
   get 'shopping' => 'shoppings#new', as: :shopping
 end

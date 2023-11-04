@@ -38,12 +38,20 @@ RSpec.describe 'Sessions', type: :request do
       it 'ログイン画面が表示されること' do
         expect(response).to have_http_status(200)
       end
+
+      it 'レスポンスにエラーメッセージが含まれること' do
+        expect(response.body).to include('メールアドレスまたはパスワードが無効です')
+      end
     end
 
     context '誤ったパスワードをフォームに記載した場合' do
       before { post session_path, params: { login_form: { email: user.email, password: 'uncorrect_pw' } } }
       it 'ログイン画面が表示されること' do
         expect(response).to have_http_status(200)
+      end
+
+      it 'レスポンスにエラーメッセージが含まれること' do
+        expect(response.body).to include('メールアドレスまたはパスワードが無効です')
       end
     end
   end

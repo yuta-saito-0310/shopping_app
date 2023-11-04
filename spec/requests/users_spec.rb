@@ -23,15 +23,23 @@ RSpec.describe 'Users', type: :request do
     context '正しくないパラメータの場合' do
       let(:invalid_params) do
         {
-          email: '',
-          password: '',
-          pw_confirmation: ''
+          name: 'a' * 31,
+          email: 'aaaaaaa',
+          password: 'foo',
+          pw_confirmation: 'bar'
         }
       end
 
       it '新しいユーザーが作成されないこと' do
         expect { post create_user_path, params: { sign_up_form: invalid_params } }.to_not change(User, :count)
         expect(response).to have_http_status(200)
+      end
+
+      it 'レスポンスにエラーメッセージが含まれること' do
+        expect { post create_user_path, params: { sign_up_form: invalid_params } }.to_not change(User, :count)
+        expect(response.body).to include('Email is invalid')
+        expect(response.body).to include('名前は30文字以内にしてください')
+        expect(response.body).to include('パスワードが確認用パスワードと一致していません')
       end
     end
   end

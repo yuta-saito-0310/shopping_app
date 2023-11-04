@@ -14,16 +14,14 @@ class SessionsController < ApplicationController
   def create
     @form = ::LoginForm.new(login_form_params)
 
-    return unless @form.email.present?
+    if @form.email.blank?
+      @form.errors.add(:email, 'メールアドレスが空白です')
+      return render action: 'new'
+    end
 
     user = User.find_by('LOWER(email) = ?', @form.email.downcase)
 
-    if ::Authenticator.new(user).authenticate(@form.password)
-      session[:user_id] = user.id
-      redirect_to :shopping
-    else
-      render action: 'new'
-    end
+    login_or_render_new(user)
   end
 
   def destroy
@@ -35,5 +33,15 @@ class SessionsController < ApplicationController
 
   def login_form_params
     params.require(:login_form).permit(:email, :password)
+  end
+
+  def login_or_render_new(user)
+    if user && ::Authenticator.new(user).authenticate(@form.password)
+      session[:user_id] = user.id
+      redirect_to :shopping
+    else
+      @form.errors.add(:base, 'メールアドレスまたはパスワードが無効です')
+      render action: 'new'
+    end
   end
 end

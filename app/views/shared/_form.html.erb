@@ -1,3 +1,14 @@
+<% if @form.errors.any? %>
+  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+    <strong class="font-bold">エラーが発生しました。</strong>
+    <ul class="list-disc list-inside mt-2">
+      <% @form.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with model: @form, url: locals[:form_url], data: {turbo: false}, class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' do |f|%>
   <% if locals[:form_url] == :create_user %>
     <div class='mb-6'>

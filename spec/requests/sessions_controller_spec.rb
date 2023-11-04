@@ -47,4 +47,29 @@ RSpec.describe 'Sessions', type: :request do
       end
     end
   end
+
+  describe 'DELETE /logout' do
+    context 'ログイン状態からログアウトした場合' do
+      before do
+        post session_path, params: { login_form: { email: user.email, password: 'factory_pw' } }
+        delete logout_path
+      end
+
+      it 'ルートページにリダイレクトすること' do
+        expect(response).to redirect_to(root_path)
+      end
+
+      it 'ログインユーザーのsessionオブジェクトがなくなっていること' do
+        expect(session[:user_id]).to eq(nil)
+      end
+    end
+
+    context 'ログアウト状態からログアウトリクエストを送信した場合' do
+      before { delete logout_path }
+
+      it 'ルートページにリダイレクトすること' do
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
 end

@@ -2,7 +2,7 @@
 
 # ユーザー登録用のオブジェクト
 class SignUpForm
-  include ActiveModel: :Model
+  include ActiveModel::Model
 
-  attr_accessor :email, :password, :pw_confirmation
+  attr_accessor :name, :email, :password, :pw_confirmation
 end

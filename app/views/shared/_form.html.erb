@@ -1,0 +1,25 @@
+<%= form_with model: @form, url: locals[:form_url], data: {turbo: false}, class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' do |f|%>
+  <% if locals[:form_url] == :create_user %>
+    <div class='mb-6'>
+      <%= f.label :name, 'ユーザー名', class: 'block text-gray-700 text-sm font-bold mb-2' %>
+      <%= f.text_field :name, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+    </div>
+  <% end %>
+  <div class='mb-6'>
+    <%= f.label :email, 'メールアドレス', class: 'block text-gray-700 text-sm font-bold mb-2' %>
+    <%= f.text_field :email, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+  </div>
+  <div class='mb-6'>
+    <%= f.label :password, 'パスワード', class: 'block text-gray-700 text-sm font-bold mb-2' %>
+    <%= f.password_field :password, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+  </div>
+  <% if locals[:form_url] == :create_user %>
+    <div class='mb-6'>
+      <%= f.label :pw_confirmation, 'パスワード確認', class: 'block text-gray-700 text-sm font-bold mb-2' %>
+      <%= f.password_field :pw_confirmation, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+    </div>
+  <% end %>
+  <div>
+    <%= f.submit locals[:submit_label], class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+  </div>
+<% end %>

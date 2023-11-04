@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   root 'top#home'
 
   get 'users/new', to: 'users#new', as: :sign_up
-  post 'users/new', to: 'users#create', as: :create_user
+  post 'users', to: 'users#create', as: :create_user
 
   get 'login' => 'sessions#new', as: :login
   post 'session' => 'sessions#create', as: :session

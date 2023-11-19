@@ -3,5 +3,6 @@
 <%= render 'shared/form', locals: { form_url: :session, submit_label: 'ログイン' } %>
 <div class='mt-4'>
    <p>登録していない人は以下で新規登録</p>
-   <%= render partial: 'shared/button', locals: { label: '新規登録', path: sign_up_path, extra_classes: 'bg-red-500 hover:bg-red-700' } %>
+   <%= render partial: 'shared/button',
+              locals: { label: '新規登録', path: sign_up_path, extra_classes: 'bg-red-500 hover:bg-red-700' } %>
  </div>

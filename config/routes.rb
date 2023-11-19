@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   delete 'session' => 'sessions#destroy', as: :logout
 
   get 'shopping' => 'shoppings#new', as: :shopping
+  post 'shopping' => 'shoppings#create', as: :create_shopping
 end

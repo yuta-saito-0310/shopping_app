@@ -1,1 +1,70 @@
-<p>計算ページ</p>
+<% if @form.errors.any? %>
+  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+    <strong class="font-bold">エラーが発生しました。</strong>
+    <ul class="list-disc list-inside mt-2">
+      <% @form.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @form, url: :create_shopping,
+              class: 'w-full flex flex-col bg-white shadow-md rounded px-2 pt-4 pb-4 mb-4' do |f| %>
+  <div class="mb-4">
+    <%= f.submit '保存',
+                 class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-1/3 sm:w-auto' %>
+  </div>
+  <div class='mb-4'>
+    <%= f.label :shopping_name, '買物名', class: 'block text-gray-700 text-sm font-bold mb-2' %>
+    <%= f.text_field :shopping_name, placeholder: '例： 12月2日の買物',
+                                     class: 'shadow appearance-none border-b border-blue-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+  </div>
+  <div class="bg-white">
+    <div data-controller="tabs" class="w-full">
+      <ul class="flex border-b-2 mb-4">
+        <li data-tabs-target="tab" data-action="click->tabs#select" class="mr-1 flex-auto text-center py-2 px-4 uppercase font-bold text-white bg-blue-500 rounded-t-lg sm:rounded-none">
+          カート内
+        </li>
+        <li data-tabs-target="tab" data-action="click->tabs#select" class="mr-1 flex-auto text-center py-2 px-4 uppercase font-bold text-blue-500 bg-white rounded-t-lg sm:rounded-none">
+          買うものリスト
+        </li>
+      </ul>
+
+      <div data-tabs-target="content" class="p-2 border-2 rounded-lg w-full sm:w-3/4 mx-auto">
+        <div id="item-header">
+          <ul class="flex border-b-2 mb-4">
+            <li class="mr-1 flex-auto text-center py-2 px-4 font-bold  w-1/2">
+               品名
+             </li>
+             <li class="mr-1 flex-auto text-center py-2 px-4 font-bold w-1/4">
+               個数
+             </li>
+             <li class="mr-1 flex-auto text-center py-2 px-4 font-bold w-1/4">
+               単価
+             </li>
+          </ul>
+          <div data-controller="cart" class="w-full">
+            <div id="cart-content">
+              <div class='cart-row flex flex-row w-full space-x-2 my-2'>
+                <%= f.text_field :cart, name: 'shopping_form[cart][][item_name]', placeholder: 'ex:Asahiビール',
+                                        class: 'w-1/2 border-b border-blue-200 focus:outline-none' %>
+                <%= f.text_field :cart, name: 'shopping_form[cart][][item_count]', placeholder: 'ex:3',
+                                        class: 'w-1/4 border-b border-blue-200 focus:outline-none' %>
+                <%= f.text_field :cart, name: 'shopping_form[cart][][item_price]', placeholder: 'ex:453',
+                                        class: 'w-1/4 border-b border-blue-200 focus:outline-none' %>
+              </div>
+            </div>
+            <div class="flex justify-center mt-4">
+              <button type="button" data-action="click->cart#create_cart_row"
+                  class='text-white text-lg font-bold py-2 px-4 m-4 rounded bg-blue-500 hover:bg-blue-700 w-full sm:w-auto'>行を追加</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-tabs-target="content" class="hidden p-4 border-2 rounded-lg w-full sm:w-3/4 mx-auto">
+        <p>買うものの内容</p>
+      </div>
+    </div>
+  </div>
+<% end %>

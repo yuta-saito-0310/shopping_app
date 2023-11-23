@@ -36,4 +36,12 @@ export default class extends Controller {
   updateSumPrice() {
     this.calculateSumPrice();
   }
+
+  // テキスト入力時にEnterキーを押すと、POST送信されてしまうことを防ぐ
+  preventSubmit(event) {
+    // Tabキーで隣のインプットに移動するなどの機能は阻止したくない
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  }
 }

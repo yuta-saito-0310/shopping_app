@@ -15,8 +15,9 @@ RSpec.describe 'Users', type: :request do
       end
 
       it '新しいユーザーを作成すること' do
-        expect { post create_user_path, params: { sign_up_form: valid_params } }.to change(User, :count).by(+1)
-        expect(response).to redirect_to(shopping_path)
+        expect { post users_path, params: { sign_up_form: valid_params } }.to change(User, :count).by(+1)
+        user = User.find_by(email: valid_params[:email])
+        expect(response).to redirect_to(new_user_shopping_path(user))
       end
     end
 
@@ -31,12 +32,12 @@ RSpec.describe 'Users', type: :request do
       end
 
       it '新しいユーザーが作成されないこと' do
-        expect { post create_user_path, params: { sign_up_form: invalid_params } }.to_not change(User, :count)
+        expect { post users_path, params: { sign_up_form: invalid_params } }.to_not change(User, :count)
         expect(response).to have_http_status(200)
       end
 
       it 'レスポンスにエラーメッセージが含まれること' do
-        expect { post create_user_path, params: { sign_up_form: invalid_params } }.to_not change(User, :count)
+        expect { post users_path, params: { sign_up_form: invalid_params } }.to_not change(User, :count)
         expect(response.body).to include('Email is invalid')
         expect(response.body).to include('名前は30文字以内にしてください')
         expect(response.body).to include('パスワードが確認用パスワードと一致していません')

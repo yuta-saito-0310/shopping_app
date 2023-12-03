@@ -3,8 +3,9 @@
 # ログインやログアウトの状態を作るコントローラー
 class SessionsController < ApplicationController
   def new
-    if current_user
-      redirect_to :shopping
+    user = current_user
+    if user.present?
+      redirect_to new_user_shopping_path(user)
     else
       @form = ::LoginForm.new
       render action: 'new'
@@ -38,7 +39,7 @@ class SessionsController < ApplicationController
   def login_or_render_new(user)
     if user && ::Authenticator.new(user).authenticate(@form.password)
       session[:user_id] = user.id
-      redirect_to :shopping
+      redirect_to new_user_shopping_path(user)
     else
       @form.errors.add(:base, 'メールアドレスまたはパスワードが無効です')
       render action: 'new'

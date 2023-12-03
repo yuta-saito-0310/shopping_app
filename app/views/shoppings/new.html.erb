@@ -9,7 +9,7 @@
   </div>
 <% end %>
 
-<%= form_with model: @form, url: :create_shopping,
+<%= form_with model: @form, url: user_shoppings_path,
               class: 'w-full flex flex-col bg-white shadow-md rounded px-2 pt-4 pb-4 mb-4' do |f| %>
   <div class='mb-4'>
     <%= f.label :shopping_name, '買物名', class: 'block text-gray-700 text-xl font-bold mb-2' %>

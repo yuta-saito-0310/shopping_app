@@ -21,7 +21,8 @@ class UsersController < ApplicationController
   private
 
   def redirect_if_logged_in
-    redirect_to :shopping if current_user
+    user = current_user
+    redirect_to new_user_shopping_path(user) if user.present?
   end
 
   def sign_up_form_params
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
     user = User.new(name: @form.name, email: @form.email, password: @form.password)
     if user.save!
       session[:user_id] = user.id
-      redirect_to shopping_path
+      redirect_to new_user_shopping_path(user)
     else
       render action: 'new'
     end

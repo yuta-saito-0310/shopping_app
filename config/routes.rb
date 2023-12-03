@@ -8,13 +8,9 @@ Rails.application.routes.draw do
   # Defines the root path route ('/')
   root 'top#home'
 
-  get 'users/new', to: 'users#new', as: :sign_up
-  post 'users', to: 'users#create', as: :create_user
+  resources :users, only: [:new, :create] do
+    resources :shoppings, only: [:index, :new, :create]
+  end
 
-  get 'login' => 'sessions#new', as: :login
-  post 'session' => 'sessions#create', as: :session
-  delete 'session' => 'sessions#destroy', as: :logout
-
-  get 'shopping' => 'shoppings#new', as: :shopping
-  post 'shopping' => 'shoppings#create', as: :create_shopping
+  resource :sessions, only: [:new, :create, :destroy]
 end

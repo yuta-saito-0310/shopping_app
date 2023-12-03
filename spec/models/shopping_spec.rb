@@ -24,5 +24,14 @@ RSpec.describe Shopping, type: :model do
         expect(shopping).to be_valid
       end
     end
+
+    context '名前が空白のとき' do
+      let(:name) { '     ' }
+
+      it 'デフォルト名を保存すること' do
+        shopping.valid?
+        expect(shopping.name).to match(/\A\d{4}年\d{2}月\d{2}日の買物\z/)
+      end
+    end
   end
 end

@@ -13,7 +13,8 @@
 ActiveRecord::Schema[7.1].define(version: 2023_10_29_080727) do
   create_table "shopping_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "item_name"
-    t.integer "sum"
+    t.integer "item_count"
+    t.integer "item_price"
     t.bigint "shopping_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -23,7 +24,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_29_080727) do
 
   create_table "shoppings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
-    t.integer "sum"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

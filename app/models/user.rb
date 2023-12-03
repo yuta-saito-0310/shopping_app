@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :shoppings
   has_many :word_suggestions
 
-  before_save :set_default_name
+  before_validation :set_default_name
   before_validation :downcase_email
   validate :name_length
   validates :email, presence: true, uniqueness: { message: 'メールアドレスが重複しています' }, email: { mode: :strict }

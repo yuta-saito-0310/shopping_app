@@ -9,11 +9,11 @@ class SignUpForm
   validate :user_valid?
   validate :pw_equal_to_pw_confirmation?
 
+  private
+
   def user
     @user ||= User.new(name:, email:, password:)
   end
-
-  private
 
   # Userモデルのバリデーションを実行し、エラーを@formに格納する
   def user_valid?

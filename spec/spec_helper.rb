@@ -92,3 +92,6 @@ RSpec.configure do |config|
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
 end
+
+# 'exclude' is defined as the negation of the 'include' method
+RSpec::Matchers.define_negated_matcher :exclude, :include

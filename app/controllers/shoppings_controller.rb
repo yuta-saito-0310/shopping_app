@@ -9,20 +9,31 @@ class ShoppingsController < ApplicationController
 
   def create
     @form = ::ShoppingForm.new(shopping_form_params)
-    if @form.valid?
-      create_shopping_or_render_new
-    else
-      render action: 'new'
-    end
+    @form.user_id = session[:user_id]
+
+    return render_new_with_error if params[:user_id].to_i != session[:user_id]
+
+    save_shopping_form_and_redirect
   end
 
   private
 
   def shopping_form_params
-    binding.irb
-    params.require(:shopping_form).permit(:shopping_name, items_name[])
+    params.require(:shopping_form).permit(:shopping_name, cart: %i[item_name item_price item_count])
   end
 
-  def create_shopping_or_render_new
+  def render_new_with_error
+    @form.errors.add(:base, '不正なユーザーIDでリクエストしました')
+    render action: 'new'
+  end
+
+  def save_shopping_form_and_redirect
+    @form.save_shopping_form
+
+    if @form.errors.empty?
+      redirect_to user_shoppings_path
+    else
+      render action: 'new'
+    end
   end
 end

@@ -8,6 +8,8 @@ class ShoppingDetail < ApplicationRecord
   validate :item_count_size
   validate :item_price_size
   validate :name_length
+  validates :item_count, numericality: { only_integer: true, message: '品物の数は数字で記入する必要があります' }
+  validates :item_price, numericality: { only_integer: true, message: '品物の単価は数字で記入する必要があります' }
 
   private
 

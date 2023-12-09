@@ -28,13 +28,26 @@ RSpec.describe ShoppingDetail, type: :model do
         expect(shopping_detail).to be_valid
       end
     end
+
+    context '1つの品物の数が文字列のとき' do
+      let(:item_count) { 'string' }
+
+      it '無効になっていること' do
+        expect(shopping_detail).not_to be_valid
+      end
+
+      it 'エラーメッセージが含まれていること' do
+        shopping_detail.valid?
+        expect(shopping_detail.errors[:item_count]).to eq(['品物の数は数字で記入する必要があります'])
+      end
+    end
   end
 
   describe 'item_priceのバリデーション' do
     let(:shopping_detail) { FactoryBot.build(:shopping_detail, item_price:) }
 
     context '1つの品物の単価が100万円以上のとき' do
-      let(:item_price) { '1_000_000' }
+      let(:item_price) { '1000000' }
 
       it '無効になっていること' do
         expect(shopping_detail).not_to be_valid
@@ -47,10 +60,23 @@ RSpec.describe ShoppingDetail, type: :model do
     end
 
     context '1つの品物の数が1000個未満のとき' do
-      let(:item_price) { '999_999' }
+      let(:item_price) { '999999' }
 
       it '有効になっていること' do
         expect(shopping_detail).to be_valid
+      end
+    end
+
+    context '1つの品物のが単価が文字列のとき' do
+      let(:item_price) { 'string' }
+
+      it '無効になっていること' do
+        expect(shopping_detail).not_to be_valid
+      end
+
+      it 'エラーメッセージが含まれていること' do
+        shopping_detail.valid?
+        expect(shopping_detail.errors[:item_price]).to eq(['品物の単価は数字で記入する必要があります'])
       end
     end
   end

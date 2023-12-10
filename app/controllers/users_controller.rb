@@ -3,6 +3,7 @@
 # ユーザー新規作成に関するコントローラ
 class UsersController < ApplicationController
   before_action :redirect_if_logged_in, only: [:new]
+  skip_before_action :authorize
 
   def new
     @form = ::SignUpForm.new

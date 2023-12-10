@@ -2,6 +2,8 @@
 
 # ログインやログアウトの状態を作るコントローラー
 class SessionsController < ApplicationController
+  skip_before_action :authorize
+
   def new
     user = current_user
     if user.present?

@@ -4,7 +4,39 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
   let(:user) { FactoryBot.create(:user) }
+
   describe 'GET /users/:user_id/shoppings' do
+    subject { get user_shoppings_path(user) }
+
+    context 'ユーザーがログインしていなかったとき' do
+      it 'ログイン画面にリダイレクトすること' do
+        is_expected.to redirect_to(new_sessions_path)
+      end
+    end
+
+    context 'ユーザーがログインしている場合' do
+      before do
+        post sessions_path, params: { login_form: { email: user.email, password: 'factory_pw' } }
+        post user_shoppings_path(user), params:
+      end
+      let(:params) do
+        {
+          shopping_form: {
+            shopping_name: 'shopping_1',
+            cart: [{ item_name: 'item_1', item_price: '100', item_count: '1' },
+                   { item_name: 'item_2', item_price: '200', item_count: '2' }]
+          }
+        }
+      end
+
+      it 'indexページが表示されること' do
+        subject
+        expect(response).to have_http_status(200)
+      end
+    end
+  end
+
+  describe 'GET /users/:user_id/shoppings/new' do
     subject { get new_user_shopping_path(user) }
     context 'ユーザーがログインしていなかったとき' do
       it 'ログイン画面にリダイレクトすること' do

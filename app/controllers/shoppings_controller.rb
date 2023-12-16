@@ -2,6 +2,10 @@
 
 # カート内の計算結果をフロントエンドとやり取りするコントローラー
 class ShoppingsController < ApplicationController
+  def index
+    @shoppings = Shopping.where(user_id: session[:user_id])
+  end
+
   def new
     @form = ::ShoppingForm.new
     render action: 'new'

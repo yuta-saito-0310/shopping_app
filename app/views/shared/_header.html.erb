@@ -1,13 +1,33 @@
-<header class="bg-blue-500 text-white p-4 flex items-center justify-between">
-  <h1 class="text-3xl font-bold">買物メモ</h1>
-  <% if current_user %>
-    <%= button_to 'ログアウト',
-                  sessions_path,
-                  method: :delete,
-                  class: 'text-white text-lg font-bold py-2 px-4 m-4 rounded bg-red-500 hover:bg-red-700' %>
-  <% else %>
-    <%= render partial: 'shared/button',
-               locals: { label: 'ログイン', path: new_sessions_path,
-                         extra_classes: 'bg-green-500 hover:bg-green-700' } %>
-  <% end %>
+<header class="bg-blue-500 text-white">
+  <nav class="p-4 flex items-center justify-between">
+    <div>
+      <span class="flex-1 text-3xl font-bold">買物メモ</span>
+    </div>
+    <div class="flex justify-end">
+      <% if current_user %>
+        <% if current_page?(new_user_shopping_path(current_user)) %>
+          <%= button_to '買物履歴',
+                        user_shoppings_path,
+                        method: :get,
+                        class: 'text-white text-lg font-bold py-2 px-4 m-1 \
+                                rounded bg-yellow-500 hover:bg-gray-500' %>
+        <% end %>
+        <% if current_page?(user_shoppings_path(current_user)) %>
+          <%= button_to 'メモ作成',
+                        new_user_shopping_path,
+                        method: :get,
+                        class: 'text-white text-lg font-bold py-2 px-4 m-1 \
+                                rounded bg-purple-500 hover:bg-purple-700' %>
+        <% end %>
+        <%= button_to 'ログアウト',
+                      sessions_path,
+                      method: :delete,
+                      class: 'text-white text-lg font-bold py-2 px-4 m-1 rounded bg-red-500 hover:bg-red-700' %>
+      <% else %>
+        <%= render partial: 'shared/button',
+                   locals: { label: 'ログイン', path: new_sessions_path,
+                             extra_classes: 'bg-green-500 hover:bg-green-700' } %>
+      <% end %>
+    </div>
+  </nav>
 </header>

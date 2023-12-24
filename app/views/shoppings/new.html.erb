@@ -49,11 +49,11 @@
               <%= f.text_field :cart, name: 'shopping_form[cart][][item_name]',
                                       data: { action: 'keydown->cart#preventSubmit' },
                                       class: 'w-1/2 border-b border-blue-200 focus:outline-none text-2xl' %>
-              <%= f.text_field :cart, name: 'shopping_form[cart][][item_price]',
+              <%= f.telephone_field :cart, name: 'shopping_form[cart][][item_price]',
                                       data: { target: 'cart.itemPrice',
                                               action: 'input->cart#updateSumPrice keydown->cart#preventSubmit' },
                                       class: 'w-1/4 border-b border-blue-200 focus:outline-none text-xl' %>
-              <%= f.text_field :cart, name: 'shopping_form[cart][][item_count]',
+              <%= f.telephone_field :cart, name: 'shopping_form[cart][][item_count]',
                                       data: { target: 'cart.itemCount',
                                               action: 'input->cart#updateSumPrice keydown->cart#preventSubmit' },
                                       class: 'w-1/4 border-b border-blue-200 focus:outline-none text-xl' %>

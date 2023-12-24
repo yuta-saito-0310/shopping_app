@@ -1,0 +1,29 @@
+version: '3'
+services:
+  web:
+    env_file:
+      - ../.env.dev
+    build:
+      context: ..
+      dockerfile: .devcontainer/dev.dockerfile
+    command: /bin/sh -c "bin/rails db:prepare; while sleep 1000; do :; done"
+    volumes:
+      - ..:/app
+      - bundle-volume:/app/.bundle
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+  
+  db:
+    env_file:
+      - ../.env.dev
+    image: postgres:14
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - pg-volume:/var/lib/postgresql/data
+volumes:
+  bundle-volume:
+  pg-volume:

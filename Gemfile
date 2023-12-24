@@ -9,7 +9,7 @@ gem "rails", "~> 7.1.1"
 gem "sprockets-rails"
 
 # Use mysql as the database for Active Record
-gem "mysql2", "~> 0.5"
+gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
@@ -62,6 +62,7 @@ group :development do
 
   gem "rubocop", "~> 1.57", require: false
   gem 'erb_lint', require: false
+  gem 'dockerfile-rails', "~> 1.5.14"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -77,3 +78,5 @@ group :test do
   gem "selenium-webdriver"
   gem 'shoulda-matchers', '~> 5.0'
 end
+
+gem "pg", "~> 1.1"

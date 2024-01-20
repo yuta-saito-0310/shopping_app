@@ -6,7 +6,7 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/dev.dockerfile
-    command: sleep infinity
+    command: /bin/sh -c "/workspaces/shopping_app/bin/docker-entrypoint && sleep infinity"
     volumes:
       - ..:/workspaces/shopping_app:cached
       - bundle-volume:/workspaces/shopping_app/.bundle

@@ -1,5 +1,17 @@
 #!/bin/bash -e
 
-# Add any container initialization steps here
+MAX_ATTEMPTS=10
+attempt=1
 
-exec "${@}"
+until PGPASSWORD=$POSTGRES_PASSWORD psql -h $DB_HOST -U $POSTGRES_USER -c '\q'; do
+  >&2 echo "Postgresの接続準備が終わっていません (試行: $attempt)"
+  sleep 1
+  ((attempt++))
+  if [ $attempt -gt $MAX_ATTEMPTS ]; then
+    >&2 echo "最大試行回数 ($MAX_ATTEMPTS 回) を超えました。スクリプトを終了します。"
+    exit 1
+  fi
+done
+
+echo 'Postgresに接続できるようになりました'
+bin/rails db:prepare

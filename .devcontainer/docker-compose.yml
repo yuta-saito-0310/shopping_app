@@ -6,15 +6,15 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/dev.dockerfile
-    command: /bin/sh -c "bin/rails db:prepare; while sleep 1000; do :; done"
+    command: sleep infinity
     volumes:
-      - ..:/app
-      - bundle-volume:/app/.bundle
+      - ..:/workspaces/shopping_app:cached
+      - bundle-volume:/workspaces/shopping_app/.bundle
     ports:
       - 3000:3000
     depends_on:
       - db
-  
+
   db:
     env_file:
       - ../.env.dev

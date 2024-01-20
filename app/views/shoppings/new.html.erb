@@ -14,23 +14,30 @@
   <div class='mb-4'>
     <%= f.label :shopping_name, '買物名', class: 'block text-gray-700 text-xl font-bold mb-2' %>
     <%= f.text_field :shopping_name, placeholder: 'ex: 12月2日の買物',
-                                     class: 'shadow appearance-none border-b border-blue-200 rounded w-full py-2 px-3 \
-                                             text-gray-700 text-xl leading-tight focus:outline-none focus:shadow-outline' %>
+                                     class: 'shadow appearance-none border-b border-blue-200 \
+                                             rounded w-full py-2 px-3 text-gray-700 text-xl \
+                                             leading-tight focus:outline-none focus:shadow-outline' %>
   </div>
   <div class="bg-white">
     <div data-controller="tabs" class="w-full">
       <ul class="flex border-b-2 mb-4">
-        <li data-tabs-target="tab" data-action="click->tabs#select" class="mr-1 flex-auto text-center text-lg py-2 px-4 uppercase font-bold text-white bg-blue-500 rounded-t-lg sm:rounded-none">
+        <li data-tabs-target="tab" data-action="click->tabs#select"
+            class="mr-1 flex-auto text-center text-lg py-2 px-4 uppercase \
+                   font-bold text-white bg-blue-500 rounded-t-lg sm:rounded-none">
           カート内
         </li>
-        <li data-tabs-target="tab" data-action="click->tabs#select" class="mr-1 flex-auto text-center text-lg py-2 px-4 uppercase font-bold text-blue-500 bg-white rounded-t-lg sm:rounded-none">
+        <li data-tabs-target="tab" data-action="click->tabs#select"
+            class="mr-1 flex-auto text-center text-lg py-2 px-4 uppercase \
+                   font-bold text-blue-500 bg-white rounded-t-lg sm:rounded-none">
           買うものリスト
         </li>
       </ul>
 
       <div data-tabs-target="content" class="p-2 border-2 rounded-lg w-full sm:w-3/4 mx-auto">
         <div data-controller="cart" class="w-full">
-          <p class="font-bold text-2xl flex justify-center">合計：<span data-cart-target="sumPrice"></span>円</p>
+          <p class="font-bold text-2xl flex justify-center">
+            合計：<span data-cart-target="sumPrice"></span>円
+          </p>
           <div id="item-header">
             <ul class="flex border-b-2 mb-4">
               <li class="mr-1 flex-auto text-center text-xl py-2 px-4 font-bold  w-1/2">
@@ -50,18 +57,20 @@
                                       data: { action: 'keydown->cart#preventSubmit' },
                                       class: 'w-1/2 border-b border-blue-200 focus:outline-none text-2xl' %>
               <%= f.telephone_field :cart, name: 'shopping_form[cart][][item_price]',
-                                      data: { target: 'cart.itemPrice',
-                                              action: 'input->cart#updateSumPrice keydown->cart#preventSubmit' },
-                                      class: 'w-1/4 border-b border-blue-200 focus:outline-none text-xl' %>
+                                           data: { target: 'cart.itemPrice',
+                                                   action: 'input->cart#updateSumPrice keydown->cart#preventSubmit' },
+                                           class: 'w-1/4 border-b border-blue-200 focus:outline-none text-xl' %>
               <%= f.telephone_field :cart, name: 'shopping_form[cart][][item_count]',
-                                      data: { target: 'cart.itemCount',
-                                              action: 'input->cart#updateSumPrice keydown->cart#preventSubmit' },
-                                      class: 'w-1/4 border-b border-blue-200 focus:outline-none text-xl' %>
+                                           data: { target: 'cart.itemCount',
+                                                   action: 'input->cart#updateSumPrice keydown->cart#preventSubmit' },
+                                           class: 'w-1/4 border-b border-blue-200 focus:outline-none text-xl' %>
             </div>
           </div>
           <div class="flex justify-center mt-4">
             <button type="button" data-action="click->cart#createCartRow"
-                class='text-white text-lg font-bold py-2 px-4 m-4 rounded bg-blue-500 hover:bg-blue-700 w-full sm:w-auto'>行を追加</button>
+                class='text-white text-lg font-bold py-2 px-4 m-4 rounded bg-blue-500 hover:bg-blue-700 w-full sm:w-auto'>
+                行を追加
+            </button>
           </div>
         </div>
       </div>

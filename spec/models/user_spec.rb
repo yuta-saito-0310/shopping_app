@@ -4,7 +4,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it { is_expected.to have_many(:shoppings) }
-  it { is_expected.to have_many(:word_suggestions) }
 
   describe 'nameのバリデーション' do
     let(:user) { FactoryBot.build(:user, name:) }

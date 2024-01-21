@@ -15,3 +15,10 @@ done
 
 echo 'Postgresに接続できるようになりました'
 bin/rails db:prepare
+
+if [ "$RAILS_ENV" = "production" ]; then
+  echo '本番環境を立ち上げます'
+  bin/rails server
+fi
+
+echo '開発環境コンテナ内です'

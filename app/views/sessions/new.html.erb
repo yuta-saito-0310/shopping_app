@@ -1,8 +1,8 @@
-<% @title = 'ログインページ' %>
+<% @title = t('.title') %>
 <h1 class='block text-gray-700 text-3xl font-bold m-10'><%= @title %></h1>
-<%= render 'shared/form', locals: { form_url: sessions_path, submit_label: 'ログイン' } %>
+<%= render 'shared/form', locals: { form_url: sessions_path, submit_label: t('.login') } %>
 <div class='mt-4'>
-   <p>登録していない人は以下で新規登録</p>
+   <p><%= t('.register_below') %></p>
    <%= render partial: 'shared/button',
-              locals: { label: '新規登録', path: new_user_path, extra_classes: 'bg-red-500 hover:bg-red-700' } %>
+              locals: { label: t('.registration'), path: new_user_path, extra_classes: 'bg-red-500 hover:bg-red-700' } %>
  </div>

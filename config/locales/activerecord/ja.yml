@@ -2,6 +2,7 @@ ja:
   errors:
     messages:
       not_a_number: 'は数値を入力してください'
+      blank: 'を入力してください'
   activerecord:
     attributes:
       shopping_detail:
@@ -19,3 +20,14 @@ ja:
               over_max_item_price: 'は1,000,000%{currency}以上は指定できません'
             item_name:
               over_max_item_name_length: 'は50文字以内にしてください'
+    attributes:
+      user:
+        nameless: '名無しさん'
+        email: 'メールアドレス'
+        name: '名前'
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              over_max_user_name_length: 'は30文字以内にしてください'

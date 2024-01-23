@@ -8,7 +8,7 @@ class User < ApplicationRecord
   before_validation :set_default_name
   before_validation :downcase_email
   validate :name_length
-  validates :email, presence: true, uniqueness: { message: 'メールアドレスが重複しています' }, email: { mode: :strict }
+  validates :email, presence: true, uniqueness: true, email: { mode: :strict }
   validates :hashed_password, presence: true
 
   def password=(raw_password)
@@ -22,13 +22,13 @@ class User < ApplicationRecord
   private
 
   def set_default_name
-    self.name = '名無しさん' if name.blank?
+    self.name = I18n.t('activerecord.attributes.user.nameless') if name.blank?
   end
 
   def name_length
     return unless name.length > 30
 
-    errors.add(:name, '名前は30文字以内にしてください')
+    errors.add(:name, :over_max_user_name_length)
   end
 
   def downcase_email

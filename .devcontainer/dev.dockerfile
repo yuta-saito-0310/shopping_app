@@ -10,10 +10,7 @@ WORKDIR ${ROOT}
 
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential  postgresql-client tig libpq-dev
-COPY Gemfile ${ROOT}
-COPY Gemfile.lock ${ROOT}
 
 RUN bundle config set --local path .bundle
 RUN mkdir -p ${ROOT}/.bundle
 RUN chown -R vscode:vscode ${ROOT}/.bundle
-RUN su vscode -c "bundle install"

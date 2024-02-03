@@ -1,5 +1,8 @@
 #!/bin/bash -e
 
+echo 'bundle installを開始'
+bundle install
+
 MAX_ATTEMPTS=10
 attempt=1
 

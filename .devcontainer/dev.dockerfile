@@ -9,7 +9,7 @@ ENV ROOT="/workspaces/shopping_app"
 WORKDIR ${ROOT}
 
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential  postgresql-client tig libpq-dev
+    apt-get install --no-install-recommends -y build-essential  postgresql-client libpq-dev
 
 RUN bundle config set --local path .bundle
 RUN mkdir -p ${ROOT}/.bundle

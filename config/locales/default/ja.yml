@@ -11,7 +11,7 @@ ja:
       user_name: 'ユーザー名'
       email: 'メールアドレス'
       password: 'パスワード'
-      password_confirmation: 'パスワード確認'
+      password_confirmation: '確認用パスワード'
       error_happened: 'エラーが発生しました'
     header:
       app_name: '買物メモ'

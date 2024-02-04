@@ -8,8 +8,8 @@ class ShoppingDetail < ApplicationRecord
   validate :item_count_size
   validate :item_price_size
   validate :name_length
-  validates :item_count, numericality: { only_integer: true, message: '品物の数は数字で記入する必要があります' }
-  validates :item_price, numericality: { only_integer: true, message: '品物の単価は数字で記入する必要があります' }
+  validates :item_count, numericality: { only_integer: true }
+  validates :item_price, numericality: { only_integer: true }
 
   private
 
@@ -22,18 +22,18 @@ class ShoppingDetail < ApplicationRecord
   def item_count_size
     return if item_count.to_i < 1000
 
-    errors.add(:item_count, '1000個以上の同一の品物は入れられません')
+    errors.add(:item_count, :over_max_item_count)
   end
 
   def item_price_size
     return if item_price.to_i < 1_000_000
 
-    errors.add(:item_price, '100万円以上の単価の品物は入れられません')
+    errors.add(:item_price, :over_max_item_price, currency: I18n.t('activerecord.attributes.shopping_detail.currency'))
   end
 
   def name_length
     return if item_name.length <= 50
 
-    errors.add(:item_name, '品名は50文字以内にしてください')
+    errors.add(:item_name, :over_max_item_name_length)
   end
 end

@@ -64,6 +64,8 @@ group :development do
   gem 'erb_lint', require: false
   gem 'dockerfile-rails', "~> 1.5.14"
 
+  gem 'rails-i18n', '~> 7.0'
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 

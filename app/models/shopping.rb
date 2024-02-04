@@ -14,12 +14,13 @@ class Shopping < ApplicationRecord
     return unless name.blank?
 
     current_time = Time.now
-    self.name = current_time.strftime('%Y年%m月%d日の買物')
+    shopping_name = I18n.t('activerecord.models.shopping')
+    self.name = current_time.strftime("%Y年%m月%d日の#{shopping_name}")
   end
 
   def name_length
     return unless name.length > 50
 
-    errors.add(:name, '名前は50文字以内にしてください')
+    errors.add(:name, 'は50文字以内にしてください')
   end
 end

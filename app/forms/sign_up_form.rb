@@ -29,6 +29,7 @@ class SignUpForm
   def pw_equal_to_pw_confirmation?
     return true if password == pw_confirmation
 
-    errors.add(:password, 'パスワードが確認用パスワードと一致していません')
+    errors.add(:password, :does_not_match_pw_confirmation,
+               password_confirmation: I18n.t('shared.form.password_confirmation'))
   end
 end

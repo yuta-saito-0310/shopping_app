@@ -97,7 +97,7 @@ RSpec.describe 'Users', type: :request do
 
           it 'エラーメッセージが含まれていること' do
             subject
-            expect(response.body).to include('名前は50文字以内にしてください')
+            expect(response.body).to include('買物名 は50文字以内にしてください')
           end
 
           it 'データが作成されていないこと' do
@@ -123,7 +123,7 @@ RSpec.describe 'Users', type: :request do
 
             it 'エラーメッセージが含まれていること' do
               subject
-              expect(response.body).to include('品物の数は数字で記入する必要があります', '品物の単価は数字で記入する必要があります')
+              expect(response.body).to include('品数 は数値を入力してください', '品物の単価 は数値を入力してください')
             end
 
             it 'データが作成されていないこと' do
@@ -148,7 +148,7 @@ RSpec.describe 'Users', type: :request do
 
             it 'エラーメッセージが含まれていること' do
               subject
-              expect(response.body).to include('100万円以上の単価の品物は入れられません', '1000個以上の同一の品物は入れられません')
+              expect(response.body).to include('品数 は1000以上を指定できません', '品物の単価 は1,000,000円以上は指定できません')
             end
 
             it 'データが作成されていないこと' do
@@ -174,8 +174,8 @@ RSpec.describe 'Users', type: :request do
 
           it 'shopping_nameのエラーメッセージのみが含まれていること' do
             subject
-            expect(response.body).to include('名前は50文字以内にしてください')
-            expect(response.body).to exclude('100万円以上の単価の品物は入れられません', '1000個以上の同一の品物は入れられません')
+            expect(response.body).to include('買物名 は50文字以内にしてください')
+            expect(response.body).to exclude('品数 は1000以上を指定できません', '品物の単価 は1,000,000円以上は指定できません')
           end
 
           it 'データが作成されていないこと' do
@@ -200,8 +200,8 @@ RSpec.describe 'Users', type: :request do
 
           it '1つ目のitemのエラーのみが含まれていること' do
             subject
-            expect(response.body).to include('100万円以上の単価の品物は入れられません')
-            expect(response.body).to exclude('品物の数は数字で記入する必要があります')
+            expect(response.body).to include('品物の単価 は1,000,000円以上は指定できません')
+            expect(response.body).to exclude('品数は 数字で記入する必要があります')
           end
 
           it 'データが作成されていないこと' do

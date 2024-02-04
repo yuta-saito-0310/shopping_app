@@ -17,7 +17,7 @@ RSpec.describe ShoppingDetail, type: :model do
 
       it 'エラーメッセージが含まれていること' do
         shopping_detail.valid?
-        expect(shopping_detail.errors[:item_count]).to eq(['1000個以上の同一の品物は入れられません'])
+        expect(shopping_detail.errors[:item_count]).to eq(['は1000以上を指定できません'])
       end
     end
 
@@ -38,7 +38,7 @@ RSpec.describe ShoppingDetail, type: :model do
 
       it 'エラーメッセージが含まれていること' do
         shopping_detail.valid?
-        expect(shopping_detail.errors[:item_count]).to eq(['品物の数は数字で記入する必要があります'])
+        expect(shopping_detail.errors[:item_count]).to eq(['は数値を入力してください'])
       end
     end
   end
@@ -55,7 +55,7 @@ RSpec.describe ShoppingDetail, type: :model do
 
       it 'エラーメッセージが含まれていること' do
         shopping_detail.valid?
-        expect(shopping_detail.errors[:item_price]).to eq(['100万円以上の単価の品物は入れられません'])
+        expect(shopping_detail.errors[:item_price]).to eq(['は1,000,000円以上は指定できません'])
       end
     end
 
@@ -76,7 +76,7 @@ RSpec.describe ShoppingDetail, type: :model do
 
       it 'エラーメッセージが含まれていること' do
         shopping_detail.valid?
-        expect(shopping_detail.errors[:item_price]).to eq(['品物の単価は数字で記入する必要があります'])
+        expect(shopping_detail.errors[:item_price]).to eq(['は数値を入力してください'])
       end
     end
   end
@@ -93,7 +93,7 @@ RSpec.describe ShoppingDetail, type: :model do
 
       it 'エラーメッセージが含まれていること' do
         shopping_detail.valid?
-        expect(shopping_detail.errors[:item_name]).to eq(['品名は50文字以内にしてください'])
+        expect(shopping_detail.errors[:item_name]).to eq(['は50文字以内にしてください'])
       end
     end
 

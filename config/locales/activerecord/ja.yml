@@ -1,0 +1,39 @@
+ja:
+  errors:
+    messages:
+      not_a_number: 'は数値を入力してください'
+      blank: 'を入力してください'
+  activerecord:
+    models:
+      shopping: 買物
+    attributes:
+      shopping:
+        name: 買物名
+      shopping_detail:
+        item_count: '品数'
+        item_name: '品名'
+        item_price: '品物の単価'
+        currency: '円'
+      user:
+        nameless: '名無しさん'
+        email: 'メールアドレス'
+        name: '名前'
+        hashed_password: 'パスワード'
+    errors:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"
+      models:
+        shopping_detail:
+          attributes:
+            item_count:
+              over_max_item_count: 'は1000以上を指定できません'
+            item_price:
+              over_max_item_price: 'は1,000,000%{currency}以上は指定できません'
+            item_name:
+              over_max_item_name_length: 'は50文字以内にしてください'
+        user:
+          attributes:
+            name:
+              over_max_user_name_length: 'は30文字以内にしてください'
+            email:
+              invalid: 'が不正な値です'

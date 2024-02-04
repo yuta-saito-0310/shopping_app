@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
       end
 
       it 'エラーメッセージが含まれていること' do
-        expect(user.errors[:name]).to eq(['名前は30文字以内にしてください'])
+        expect(user.errors[:name]).to eq(['は30文字以内にしてください'])
       end
     end
 
@@ -73,9 +73,9 @@ RSpec.describe User, type: :model do
     context 'パスワードがnilのとき' do
       let(:password) { nil }
 
-      it 'ユーザーが無効であること' do
+      it '無効のメッセージが含まれていること' do
         user.valid?
-        expect(user.errors[:hashed_password]).to include("can't be blank")
+        expect(user.errors[:hashed_password]).to include('を入力してください')
       end
     end
 

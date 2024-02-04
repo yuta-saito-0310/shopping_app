@@ -38,9 +38,9 @@ RSpec.describe 'Users', type: :request do
 
       it 'レスポンスにエラーメッセージが含まれること' do
         expect { post users_path, params: { sign_up_form: invalid_params } }.to_not change(User, :count)
-        expect(response.body).to include('Email is invalid')
-        expect(response.body).to include('名前は30文字以内にしてください')
-        expect(response.body).to include('パスワードが確認用パスワードと一致していません')
+        expect(response.body).to include('メールアドレス が不正な値です')
+        expect(response.body).to include('名前 は30文字以内にしてください')
+        expect(response.body).to include('パスワード が確認用パスワードと一致していません')
       end
     end
   end

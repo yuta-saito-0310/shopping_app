@@ -1,0 +1,14 @@
+ja:
+  activemodel:
+    attributes:
+      sign_up_form:
+        name: '名前'
+        email: 'メールアドレス'
+        password: 'パスワード'
+    errors:
+      models:
+        sign_up_form:
+          attributes:
+            password:
+              does_not_match_pw_confirmation: 'が%{password_confirmation}と一致していません'
+        

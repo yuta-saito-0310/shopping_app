@@ -5,6 +5,8 @@ ja:
       blank: 'を入力してください'
   activerecord:
     attributes:
+      shopping:
+        name: 買物名
       shopping_detail:
         item_count: '品数'
         item_name: '品名'
@@ -15,6 +17,8 @@ ja:
         email: 'メールアドレス'
         name: '名前'
     errors:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"
       models:
         shopping_detail:
           attributes:

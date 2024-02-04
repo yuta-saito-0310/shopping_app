@@ -20,6 +20,6 @@ class Shopping < ApplicationRecord
   def name_length
     return unless name.length > 50
 
-    errors.add(:name, '名前は50文字以内にしてください')
+    errors.add(:name, 'は50文字以内にしてください')
   end
 end

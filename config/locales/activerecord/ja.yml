@@ -4,6 +4,8 @@ ja:
       not_a_number: 'は数値を入力してください'
       blank: 'を入力してください'
   activerecord:
+    models:
+      shopping: 買物
     attributes:
       shopping:
         name: 買物名

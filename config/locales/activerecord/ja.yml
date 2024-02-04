@@ -10,6 +10,10 @@ ja:
         item_name: '品名'
         item_price: '品物の単価'
         currency: '円'
+      user:
+        nameless: '名無しさん'
+        email: 'メールアドレス'
+        name: '名前'
     errors:
       models:
         shopping_detail:
@@ -20,13 +24,6 @@ ja:
               over_max_item_price: 'は1,000,000%{currency}以上は指定できません'
             item_name:
               over_max_item_name_length: 'は50文字以内にしてください'
-    attributes:
-      user:
-        nameless: '名無しさん'
-        email: 'メールアドレス'
-        name: '名前'
-    errors:
-      models:
         user:
           attributes:
             name:

@@ -62,3 +62,6 @@ USER 1000:1000
 
 # Entrypoint sets up the container.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+EXPOSE 3000
+CMD ["./bin/rails", "server"]

@@ -6,10 +6,9 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/dev.dockerfile
-    command: /bin/sh -c "/workspaces/shopping_app/bin/docker-entrypoint && sleep infinity"
+    command: sleep infinity
     volumes:
       - ..:/workspaces/shopping_app:cached
-      - bundle-volume:/workspaces/shopping_app/.bundle
     ports:
       - 3000:3000
     depends_on:
@@ -25,5 +24,4 @@ services:
     volumes:
       - pg-volume:/var/lib/postgresql/data
 volumes:
-  bundle-volume:
   pg-volume:

@@ -34,6 +34,11 @@ ja:
       add_columun: '行を追加'
       comming_soon: '機能追加中'
       save: '保存'
+    index:
+      shopping_name: '買物名'
+      date: '日付'
+      contents: '購入内容'
+      detail: '詳細'
   sessions:
     new:
       title: 'ログインページ'

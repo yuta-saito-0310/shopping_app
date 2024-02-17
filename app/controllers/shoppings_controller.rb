@@ -20,6 +20,21 @@ class ShoppingsController < ApplicationController
     save_shopping_form_and_redirect
   end
 
+  def modal
+    shopping = @current_user.shoppings.includes(:shopping_details).find_by(id: params[:id])
+
+    return render json: [] if shopping.nil?
+
+    details_array = make_details_array(shopping)
+
+    result = {
+      shopping_name: shopping.name,
+      shopping_details: details_array
+    }
+
+    render json: result
+  end
+
   private
 
   def shopping_form_params
@@ -38,6 +53,16 @@ class ShoppingsController < ApplicationController
       redirect_to user_shoppings_path
     else
       render action: 'new'
+    end
+  end
+
+  def make_details_array(shopping)
+    shopping.shopping_details.map do |detail|
+      {
+        item_name: detail.item_name,
+        item_count: detail.item_count,
+        item_price: detail.item_price
+      }
     end
   end
 end

@@ -257,4 +257,62 @@ RSpec.describe 'Users', type: :request do
       end
     end
   end
+
+  describe 'GET /users/:user_id/shoppings/:id/modal' do
+    subject { get modal_user_shopping_path(user, shopping) }
+
+    let(:user) { FactoryBot.create(:user) }
+    let(:shopping) { Shopping.create(name: 'test', user_id: user.id) }
+    let!(:detail1) do
+      ShoppingDetail.create(item_name: 'item1', item_count: 1, item_price: 100, shopping_id: shopping.id)
+    end
+    let!(:detail2) do
+      ShoppingDetail.create(item_name: 'item2', item_count: 2, item_price: 200, shopping_id: shopping.id)
+    end
+
+    context '正常系' do
+      before { post sessions_path, params: { login_form: { email: user.email, password: 'factory_pw' } } }
+
+      it '買物名が返されること' do
+        subject
+        body = JSON.parse(response.body)
+
+        expect(body['shopping_name']).to eq('test')
+      end
+
+      it '購入情報が返されること' do
+        subject
+        body = JSON.parse(response.body)
+
+        expect(body['shopping_details']).to match_array([
+                                                          { 'item_name' => 'item1', 'item_count' => 1,
+                                                            'item_price' => 100 },
+                                                          { 'item_name' => 'item2', 'item_count' => 2,
+                                                            'item_price' => 200 }
+                                                        ])
+      end
+    end
+
+    context '準正常系' do
+      context 'ユーザーがログインしていなかったとき' do
+        it 'ログイン画面にリダイレクトすること' do
+          subject
+          expect(response).to redirect_to(new_sessions_path)
+        end
+      end
+
+      context '他のユーザーでログインしているとき' do
+        before { post sessions_path, params: { login_form: { email: user2.email, password: 'factory_pw' } } }
+
+        let(:user2) { FactoryBot.create(:user) }
+
+        it '空の配列が返されること' do
+          subject
+          body = JSON.parse(response.body)
+
+          expect(body).to eq([])
+        end
+      end
+    end
+  end
 end

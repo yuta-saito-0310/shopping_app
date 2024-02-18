@@ -3,6 +3,8 @@ ja:
     messages:
       not_a_number: 'は数値を入力してください'
       blank: 'を入力してください'
+      not_found: '該当するデータが見つかりません'
+      internal_server_error: 'サーバーエラーが発生しました'
   activerecord:
     models:
       shopping: 買物

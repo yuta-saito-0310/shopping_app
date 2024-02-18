@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Users', type: :request do
+RSpec.describe 'Shoppings', type: :request do
   let(:user) { FactoryBot.create(:user) }
 
   describe 'GET /users/:user_id/shoppings' do
@@ -306,11 +306,35 @@ RSpec.describe 'Users', type: :request do
 
         let(:user2) { FactoryBot.create(:user) }
 
-        it '空の配列が返されること' do
+        it '404が返されること' do
+          is_expected.to eq(404)
+        end
+
+        it 'エラーメッセージが返されること' do
           subject
           body = JSON.parse(response.body)
 
-          expect(body).to eq([])
+          expect(body['error']).to eq('該当するデータが見つかりません')
+        end
+      end
+    end
+
+    context '異常系' do
+      before do
+        post sessions_path, params: { login_form: { email: user.email, password: 'factory_pw' } }
+        allow_any_instance_of(User).to receive_message_chain(:shoppings, :includes, :find).and_raise(StandardError)
+      end
+
+      context '何かしらのエラーが発生したとき' do
+        it '500が返されること' do
+          is_expected.to eq(500)
+        end
+
+        it 'エラーメッセージが返されること' do
+          subject
+          body = JSON.parse(response.body)
+
+          expect(body['error']).to eq('サーバーエラーが発生しました')
         end
       end
     end

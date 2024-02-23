@@ -9,10 +9,15 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"rebornix.Ruby", // Ruby
-				"misogi.ruby-rubocop", // Rubocop
-				"ms-azuretools.vscode-docker" // Docker Extention
-			]
+				"rebornix.Ruby",
+				"misogi.ruby-rubocop",
+				"ms-azuretools.vscode-docker",
+				"esbenp.prettier-vscode"
+			],
+			"settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
 		}
 	}
 }

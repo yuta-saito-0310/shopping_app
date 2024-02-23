@@ -1,51 +1,53 @@
 ja:
   top:
     home:
-      title: '開発コンテナ修正後'
+      title: "開発コンテナ修正後"
   users:
     new:
-      title: '登録ページ'
-      registration: '新規登録'
+      title: "登録ページ"
+      registration: "新規登録"
   shared:
     form:
-      user_name: 'ユーザー名'
-      email: 'メールアドレス'
-      password: 'パスワード'
-      password_confirmation: '確認用パスワード'
-      error_happened: 'エラーが発生しました'
+      user_name: "ユーザー名"
+      email: "メールアドレス"
+      password: "パスワード"
+      password_confirmation: "確認用パスワード"
+      error_happened: "エラーが発生しました"
     header:
-      app_name: '買物メモ'
-      shopping_history: '買物履歴'
-      create_memo: 'メモ作成'
-      logout: 'ログアウト'
-      login: 'ログイン'
+      app_name: "買物メモ"
+      shopping_history: "買物履歴"
+      create_memo: "メモ作成"
+      logout: "ログアウト"
+      login: "ログイン"
   shoppings:
     new:
-      error_happened: 'エラーが発生しました'
-      shopping_name: '買物名'
-      shopping_name_example: '買物のタイトル'
-      cart_contents: 'カートの中身'
-      to_buy_list: '買う予定リスト'
-      sum: '合計'
-      currency: '円'
-      item_name: '品名'
-      item_price: '単価'
-      item_amount: '個数'
-      add_columun: '行を追加'
-      comming_soon: '機能追加中'
-      save: '保存'
+      error_happened: "エラーが発生しました"
+      shopping_name: "買物名"
+      shopping_name_example: "買物のタイトル"
+      cart_contents: "カートの中身"
+      to_buy_list: "買う予定リスト"
+      sum: "合計"
+      currency: "円"
+      item_name: "品名"
+      item_price: "単価"
+      item_amount: "個数"
+      add_columun: "行を追加"
+      comming_soon: "機能追加中"
+      save: "保存"
     index:
-      shopping_name: '買物名'
-      date: '日付'
-      contents: '購入内容'
-      detail: '詳細'
+      shopping_name: "買物名"
+      date: "日付"
+      contents: "購入内容"
+      detail: "詳細"
+      shopping_name: "買物名"
+      sum: "合計"
+      currency: "円"
+      item_name: "品名"
+      item_price: "単価"
+      item_amount: "個数"
   sessions:
     new:
-      title: 'ログインページ'
-      login: 'ログイン'
-      register_below: '登録していない人は以下で登録してください'
-      registration: '新規登録'
-
-
-      
-      
+      title: "ログインページ"
+      login: "ログイン"
+      register_below: "登録していない人は以下で登録してください"
+      registration: "新規登録"

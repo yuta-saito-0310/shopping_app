@@ -31,9 +31,11 @@
   <div id="modal" data-controller="modal" class="hidden flex flex-col px-2 pt-4 pb-4">
     <p class="font-bold text-2xl flex justify-center">
       <%= t('.shopping_name') %>
+      <span id="shopping-name"></span>
     </p>
+
     <p class="font-bold text-2xl flex justify-center">
-      <%= t('.sum') %><span data-cart-target="sumPrice"></span><%= t('.currency') %>
+      <%= t('.sum') %><span id="sum-price"></span><%= t('.currency') %>
     </p>
     <div id="item-header">
       <ul class="text-center flex border-b-2 border-blue-200 mb-4">
@@ -48,12 +50,8 @@
          </li>
       </ul>
     </div>
-    <div id="details" class='border-b-2 border-blue-200'>
-      <div class='text-center flex flex-row w-full space-x-2 my-2'>
-        <p class='item-name w-1/2 text-xl'></p>
-        <p class='item-price w-1/4 text-xl'></p>
-        <p class='item-amount w-1/4 text-xl'></p>
-      </div>
+    <div id="details">
+      <div id="details-content"></div>
     </div>
   </div>
 </div>

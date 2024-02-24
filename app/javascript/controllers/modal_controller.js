@@ -6,6 +6,9 @@ export default class extends Controller {
     const modal = document.getElementById("modal");
     modal.classList.remove("hidden");
 
+    const overlay = document.getElementById("overlay");
+    overlay.classList.remove("hidden");
+
     await this.makeModalContent(evt, modal);
   }
 
@@ -17,7 +20,7 @@ export default class extends Controller {
 
     // 買物名を表示
     const shoppingNameNode = document.getElementById("shopping-name");
-    shoppingNameNode.innerHTML = `: ${data["shopping_name"]}`;
+    shoppingNameNode.innerHTML = data["shopping_name"];
 
     //合計金額を表示
     const sumPriceNode = document.getElementById("sum-price");
@@ -53,7 +56,7 @@ export default class extends Controller {
       const itemRow = document.createElement("div");
       itemRow.setAttribute(
         "class",
-        "text-center flex flex-row w-full space-x-2 my-2 border-b-2 border-blue-200"
+        "flex flex-row w-full space-x-2 my-2 border-b-2 border-blue-200"
       );
 
       const itemName = this.createItemElement(

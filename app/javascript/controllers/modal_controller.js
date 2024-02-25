@@ -3,13 +3,13 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   // hiddenになっていたモーダル要素を表示する
   async showModal(evt) {
-    const modal = document.getElementById("modal");
-    modal.classList.remove("hidden");
-
-    const overlay = document.getElementById("overlay");
-    overlay.classList.remove("hidden");
-
+    this.toggleModal(true);
     await this.makeModalContent(evt, modal);
+  }
+
+  // ×ボタンを押したときにモーダルとオーバーレイを閉じるメソッド
+  closeModal(evt) {
+    this.toggleModal(false);
   }
 
   // モーダルの内容を作成
@@ -85,16 +85,20 @@ export default class extends Controller {
     return element;
   }
 
-  // ×ボタンを押したときにモーダルとオーバーレイを閉じるメソッド
-  closeModal(evt) {
+  // モーダルの表示・非表示を切り替えるメソッド
+  toggleModal(isVisible) {
     const modal = document.getElementById("modal");
-    modal.classList.add("hidden");
-
     const overlay = document.getElementById("overlay");
-    overlay.classList.add("hidden");
-
     const detailsContentNode = document.getElementById("details-content");
-    this.removeAllChildNodes(detailsContentNode);
+
+    if (isVisible) {
+      modal.classList.remove("hidden");
+      overlay.classList.remove("hidden");
+    } else {
+      modal.classList.add("hidden");
+      overlay.classList.add("hidden");
+      this.removeAllChildNodes(detailsContentNode);
+    }
   }
 
   // 子要素をすべて削除するメソッド

@@ -84,4 +84,23 @@ export default class extends Controller {
     element.innerHTML = item;
     return element;
   }
+
+  // ×ボタンを押したときにモーダルとオーバーレイを閉じるメソッド
+  closeModal(evt) {
+    const modal = document.getElementById("modal");
+    modal.classList.add("hidden");
+
+    const overlay = document.getElementById("overlay");
+    overlay.classList.add("hidden");
+
+    const detailsContentNode = document.getElementById("details-content");
+    this.removeAllChildNodes(detailsContentNode);
+  }
+
+  // 子要素をすべて削除するメソッド
+  removeAllChildNodes(node) {
+    while (node.firstChild) {
+      node.removeChild(node.firstChild);
+    }
+  }
 }

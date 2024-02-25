@@ -31,7 +31,10 @@
   <div id="overlay" class="hidden fixed top-0 left-0 w-full h-full bg-black opacity-50"></div>
   <div id="modal" data-controller="modal"
     class="w-3/4 bg-white hidden flex flex-col px-2 pt-1 pb-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-    <button id="close-button" class="ml-auto mr-2 font-bold text-2xl">×</button>
+    <button id="close-button" class="ml-auto mr-2 font-bold text-2xl"
+      data-controller="modal" data-action="click->modal#closeModal">
+      ×
+    </button>
     <p id="shopping-name" class="font-bold text-2xl flex justify-center"></p>
     <p class="font-bold text-2xl flex justify-center">
       <%= t('.sum') %><span id="sum-price"></span><%= t('.currency') %>

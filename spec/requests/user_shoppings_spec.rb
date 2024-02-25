@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Users', type: :request do
+RSpec.describe 'Shoppings', type: :request do
   let(:user) { FactoryBot.create(:user) }
 
   describe 'GET /users/:user_id/shoppings' do
@@ -254,6 +254,88 @@ RSpec.describe 'Users', type: :request do
       it 'ログイン画面にリダイレクトすること' do
         subject
         expect(response).to redirect_to(new_sessions_path)
+      end
+    end
+  end
+
+  describe 'GET /users/:user_id/shoppings/:id/modal' do
+    subject { get modal_user_shopping_path(user, shopping) }
+
+    let(:user) { FactoryBot.create(:user) }
+    let(:shopping) { Shopping.create(name: 'test', user_id: user.id) }
+    let!(:detail1) do
+      ShoppingDetail.create(item_name: 'item1', item_count: 1, item_price: 100, shopping_id: shopping.id)
+    end
+    let!(:detail2) do
+      ShoppingDetail.create(item_name: 'item2', item_count: 2, item_price: 200, shopping_id: shopping.id)
+    end
+
+    context '正常系' do
+      before { post sessions_path, params: { login_form: { email: user.email, password: 'factory_pw' } } }
+
+      it '買物名が返されること' do
+        subject
+        body = JSON.parse(response.body)
+
+        expect(body['shopping_name']).to eq('test')
+      end
+
+      it '購入情報が返されること' do
+        subject
+        body = JSON.parse(response.body)
+
+        expect(body['shopping_details']).to match_array([
+                                                          { 'item_name' => 'item1', 'item_count' => 1,
+                                                            'item_price' => 100 },
+                                                          { 'item_name' => 'item2', 'item_count' => 2,
+                                                            'item_price' => 200 }
+                                                        ])
+      end
+    end
+
+    context '準正常系' do
+      context 'ユーザーがログインしていなかったとき' do
+        it 'ログイン画面にリダイレクトすること' do
+          subject
+          expect(response).to redirect_to(new_sessions_path)
+        end
+      end
+
+      context '他のユーザーでログインしているとき' do
+        before { post sessions_path, params: { login_form: { email: user2.email, password: 'factory_pw' } } }
+
+        let(:user2) { FactoryBot.create(:user) }
+
+        it '404が返されること' do
+          is_expected.to eq(404)
+        end
+
+        it 'エラーメッセージが返されること' do
+          subject
+          body = JSON.parse(response.body)
+
+          expect(body['error']).to eq('該当するデータが見つかりません')
+        end
+      end
+    end
+
+    context '異常系' do
+      before do
+        post sessions_path, params: { login_form: { email: user.email, password: 'factory_pw' } }
+        allow_any_instance_of(User).to receive_message_chain(:shoppings, :includes, :find).and_raise(StandardError)
+      end
+
+      context '何かしらのエラーが発生したとき' do
+        it '500が返されること' do
+          is_expected.to eq(500)
+        end
+
+        it 'エラーメッセージが返されること' do
+          subject
+          body = JSON.parse(response.body)
+
+          expect(body['error']).to eq('サーバーエラーが発生しました')
+        end
       end
     end
   end

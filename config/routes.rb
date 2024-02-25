@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   root 'top#home'
 
   resources :users, only: [:new, :create] do
-    resources :shoppings, only: [:index, :new, :create]
+    resources :shoppings, only: [:index, :new, :create] do
+      get 'modal', on: :member
+    end
   end
 
   resource :sessions, only: [:new, :create, :destroy]

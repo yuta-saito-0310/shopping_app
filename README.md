@@ -1,24 +1,35 @@
-# README
+## アプリの説明
+このアプリは、買い出し時にカゴの中に入れた商品の金額をメモするためのアプリです。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+アプリURL: https://shopping-memo.fly.dev/
 
-Things you may want to cover:
+## ローカル環境構築手順
 
-* Ruby version
+### このリポジトリをクローンする
+- `git clone git@github.com:yuta-saito-0310/shopping_app.git`をしてリポジトリをホストマシンに取り込みます
+- `cd shopping_app/ && code .`でアプリのフォルダーを開きます
 
-* System dependencies
+### .envファイルを用意する
+- `cp .env.dev.sample .env.dev`で環境変数ファイルを用意します
 
-* Configuration
+### 開発コンテナを立ち上げる
+#### Dev Containersを入れている場合
+VS Codeの拡張機能の[Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers)を利用している場合は、`Crtl + Shift + P` または`Command + Shift + P`からコマンドパレットを開き、`Rebuild and Reopen in Container`を選択して開発コンテナを立ち上げます
 
-* Database creation
+#### Dev Containersを入れていない場合
+Dev Containersを入れていない場合は、docker composeを利用してコンテナを立ち上げます
+- `cd .devcontainer`で開発コンテナ用のdocker-compose.ymlが記載されているフォルダーに移動します
+- `docker compose up -d`で開発コンテナを立ち上げます。コンテナがうまく立ち上がっていない時は`docker compose up`で失敗原因を探していきます
+- `docker compose exec web /bin/bash`で開発コンテナに入ります
 
-* Database initialization
+### gemをインストールする
+- `bundle install`をコンテナ内で実行して必要なgemをインストールします
 
-* How to run the test suite
+### tailwindcssをビルドする
+- `rails tailwindcss:build`でCSSをビルドします
 
-* Services (job queues, cache servers, search engines, etc.)
+### dbをセットアップする
+- `rails db:setup`でDBを作成します
 
-* Deployment instructions
-
-* ...
+### サーバーを立ち上げる
+- `rails s`でサーバーを立ち上げ、localhost:3000にアクセスします

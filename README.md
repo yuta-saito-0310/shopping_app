@@ -2,6 +2,10 @@
 このアプリは、買い出し時にカゴの中に入れた商品の金額をメモするためのアプリです。
 
 アプリURL: https://shopping-memo.fly.dev/
+スマートフォンでの閲覧を推奨
+スマートフォンでは下記URLを読み込むとアクセスできます
+
+![](app/assets/images/shopping_memo_qr.png)
 
 ## ローカル環境構築手順
 
@@ -33,3 +37,10 @@ Dev Containersを入れていない場合は、docker composeを利用してコ�
 
 ### サーバーを立ち上げる
 - `rails s`でサーバーを立ち上げ、localhost:3000にアクセスします
+
+## テストの実行方法
+- `bundle exec rspec`でテストを実行できます
+- PRを出した際もRSpecが実行されます
+
+## デプロイ方法
+- mainブランチにマージされると、自動的にデプロイされます
